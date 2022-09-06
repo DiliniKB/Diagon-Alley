@@ -74,7 +74,11 @@ def categories(request):
         "Tricks",
         "Other"
     ]
-    return render(request, 'auctions/categories.html', {'catArray': catArray})
+
+    return render(request, 'auctions/categories.html', {
+        'catArray': catArray,
+        'listings' : Listing.objects.all()
+    })
 
 def create(request):
     # pass
@@ -96,8 +100,7 @@ def create(request):
         })
 
 def listing_view(request, listing_id):
-    return render(request, 'view/listing.html', {
+    return render(request, 'auctions/view.html', {
         "listing": Listing.objects.get(id=listing_id)
     })
 
-       

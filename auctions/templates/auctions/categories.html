@@ -4,7 +4,27 @@
     <h2>Categories</h2>
     <ul>
         {% for category in catArray %}
-        <li>{{category}}</li>
+        <li>
+        <h6>{{category}}</h6>
+        {% for listing in listings %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{listing.image}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{listing.title}}</h5>
+              <div class="row">
+                <div class="col-sm" style="align-self: center;">
+                    <p class="card-text">{{listing.currunt_price}} Galleons</p>
+                </div>
+                <div class="col-sm">
+                    <a href="{% url 'view' listing.id%}" class="btn btn-primary">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
         {% endfor %}
+        </li>
+        {% endfor %}
+        
     </ul>
+
 {% endblock %}
