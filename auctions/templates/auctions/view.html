@@ -2,9 +2,17 @@
 
 {% block body %}
 
-<h2>{{listing.title}}</h2>
-<img src="{{listing.image}}" alt="image">
-<p>{{listing.description}}</p>
-<p>{{listings}}</p>
+<div class="container">
+    <h2>{{listing.title}}</h2>
+    <img src="{{listing.image}}" alt="image" style="margin: auto;">
+    <p>{{listing.description}}</p>
+    <p>{{listings}}</p>
+
+    {% if user.is_authenticated %}
+        <a class="btn btn-secondary" href="{% url 'watchlistAdd' listing.id %}">Add to Watchlist</a>
+    {% endif %}
+
+    <p>{{message}}</p>
+</div>
 
 {% endblock %}

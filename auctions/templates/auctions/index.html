@@ -3,5 +3,19 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
+    <div class="container d-flex flex-wrap align-items-center">
+    {% for listing in listings %}
+        <div class="card" style=" margin: 1em;">
+            <img class="card-img-top" src="{{listing.image}}" alt="Card image" style="width: 10rem; height: 10rem; object-fit: contain; margin: 0 auto;">
+            <div class="card-body">
+                <h5 class="card-title ">{{listing.title}}</h5>
+                <p class="card-text" style="overflow: hidden;">{{listing.description}}</p>
+                <div class="d-flex flex-row justify-content-around">
+                    <p class="align-self-center">Current Price : {{listing.currunt_price}} Galleons</p>
+                    <a href="{% url 'view' listing.id%}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
 {% endblock %}

@@ -9,7 +9,9 @@ from .forms import create_listing
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    return render(request, "auctions/index.html", {
+      "listings": Listing.objects.all()  
+    })
 
 
 def login_view(request):
@@ -101,6 +103,21 @@ def create(request):
 
 def listing_view(request, listing_id):
     return render(request, 'auctions/view.html', {
-        "listing": Listing.objects.get(id=listing_id)
+        "listing": Listing.objects.get(id=listing_id),
+        "message": ""
     })
 
+def addtoWatchlist(request, listing_id):
+    try: 
+        listings = Listing.objects.get(id=listing_id)
+        user = User.objects.get(id=request.user.id)
+        Watchlist.listings.add(user)
+        return render(request, "auctions/view.html", {
+            "listing": Listing.objects.get(id=listing_id),
+            "message": "Succcess"
+        })
+    except Watchlist.DoesNotExist:
+        return render(request, "auctions/view.html", {
+                "listing": Listing.objects.get(id=listing_id),
+                "message": "No database"
+            })
